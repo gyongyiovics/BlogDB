@@ -8,9 +8,6 @@ public class User {
     private int id;
     private String userName;
     private boolean isRegistered;
-    //private RoleName roleName;
-    //private String note;
-    //private String comment;
 
     //connection --> user & role
     private void getRole(RoleName roleName) {

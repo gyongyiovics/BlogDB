@@ -2,6 +2,15 @@ DROP DATABASE IF EXISTS  blogDB;
 CREATE DATABASE blogDB;
 USE blogDB;
 
+DROP TABLE IF EXISTS blog_schema;
+CREATE TABLE blog_schema(
+    /*id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,*/
+    schema_name varchar(50) PRIMARY KEY,
+    category varchar(50),
+    color varchar(20),
+    background_image blob
+);
+
 DROP TABLE IF EXISTS blog_table;
 CREATE TABLE blog_table(
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
@@ -31,15 +40,6 @@ CREATE TABLE role_table(
     can_write_comment boolean
 );
 
-DROP TABLE IF EXISTS blog_schema;
-CREATE TABLE blog_schema(
-    /*id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,*/
-    schema_name varchar(50) PRIMARY KEY,
-    category varchar(50),
-    color varchar(20),
-    background_image blob
-);
-
 DROP TABLE IF EXISTS note_table;
 CREATE TABLE note_table(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
@@ -59,7 +59,7 @@ CREATE TABLE comment_table(
     comment_title varchar(30),
     comment_text varchar(50),
     user_name varchar(50),
-    note_id int,
+    note_id INT UNSIGNED NOT NULL,
     /*has_note boolean,*/
     /*this might be always true! has_comment instead?*/
     /*note_title varchar(50) if the has_note is false, this is empty*/
@@ -80,26 +80,26 @@ DROP TABLE IF EXISTS connect_user_and_note;
 CREATE TABLE connect_user_and_note(
 /*	is_own boolean,
     authorities varchar(50)*/ /*enum instead: canModify, canAdd, canRead, canDelete*/
-    user_id int,
+    user_id INT UNSIGNED NOT NULL,
     is_own boolean,
     can_modify int,
     can_add int,
     can_read int,
     can_delete int,
-    note_id int,
+    note_id INT UNSIGNED NOT NULL,
     FOREIGN KEY(user_id) REFERENCES user_table(id),
     FOREIGN KEY(note_id) REFERENCES note_table(id)
 );
 
 DROP TABLE IF EXISTS connect_user_and_comment;
 CREATE TABLE connect_user_and_comment(
-    user_id int,
+    user_id INT UNSIGNED NOT NULL,
     is_own boolean,
     can_modify int,
     can_add int,
     can_read int,
     can_delete int,
-    comment_id int,
+    comment_id INT UNSIGNED NOT NULL,
     FOREIGN KEY(user_id) REFERENCES user_table(id),
     FOREIGN KEY(comment_id) REFERENCES comment_table(id)
 );
@@ -108,7 +108,7 @@ DROP TABLE IF EXISTS connect_user_and_roles;
 CREATE TABLE connect_user_and_roles(
 	/*is_registered boolean,*/
     role_name ENUM('ADMIN', 'MODERATOR','USER') DEFAULT 'USER',
-    user_id int,
+    user_id INT UNSIGNED NOT NULL,
     FOREIGN KEY(role_name) REFERENCES role_table(role_name),
     FOREIGN KEY(user_id) REFERENCES user_table(id)
 );
