@@ -5,7 +5,7 @@ az alkalmazásban regisztráció nélkül is lehet blogbejegyzéseket olvasni, v
 az alkalmazásban a regisztrált felhasználók szerepkörrel rendelkeznek
 a szerepkör lehet: admin / moderator / user
 a szerepkörökhöz tartozó jogosultságok megírása a feladat része
-példák lehetséges jogosultságokra (nem kötelezendően megvalósítandó):
+példák lehetséges jogosultságokra (nem kötelezően megvalósítandó):
 felhasználók adatainak olvasása
 csak admin, illetve a saját felhasználói adataihoz minden user hozzáfér
 felhasználók adatainak módosítása
