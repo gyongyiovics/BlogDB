@@ -6,4 +6,6 @@ public class Comment {
     private String commentText;
     private String userName;
     /*private int noteId*/
+
+
 }
