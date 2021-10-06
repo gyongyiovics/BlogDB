@@ -111,6 +111,9 @@ tartalmazza az adatbázis-kapcsolathoz szükséges eszközöket (osztályokat, m
 JDBC-n keresztül
 a saját adatbázis-szervered kapcsolódásához szükséges felhasználónevet és jelszót szigorúan tilos beleírnod a forráskódba!
 lehetőséget biztosít a felhasználói szerepkörök és jogosultságaik kezelésére
+*********
+JDBC - UPDATE? or IF/CASE
+*********
 tartalmaz egy-egy metódust, amely teljesíti az alábbi feladatokat (egy feladat - egy metódus):
 
 visszaadja adott szerepkörű felhasználók összes adatát
