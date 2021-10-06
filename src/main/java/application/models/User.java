@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,21 +20,27 @@ public class User extends Person {
     private String userName;
     @Getter
     private String passWord;
+    @Getter
+    private RoleName usersRole;
 
-    //connection --> user & role
-    private void getRole(RoleName roleName) {
-        System.out.println("Connect user to role");
-    }
 
-    //connection --> user & authorities
-
-    public List<Note> getNotes() {
+    public List<Note> getNotes(Note note) {
         System.out.println("return a list of notes of user");
+        List<Note> noteList = new ArrayList<>();
+        if(note.getUserName().equals(userName)) {
+            noteList.add(note);
+            return noteList;
+        }
         return null;
     }
 
-    private List<Comment> getComments(List<Comment> comments) {
+    private List<Comment> getComments(Comment comment) {
         System.out.println("return a list of comments of user");
+        List<Comment> commentList = new ArrayList<>();
+        if(comment.getUserName().equals(userName)) {
+            commentList.add(comment);
+            return commentList;
+        }
         return null;
     }
 }

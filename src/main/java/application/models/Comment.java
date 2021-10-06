@@ -8,9 +8,9 @@ public class Comment {
     private String commentTitle;
     private String commentText;
     private String userName;
-    private int noteId;
+    private String noteTitle;
 
-    //TODO: can add logic to noteId
+    //TODO: add logic to getNoteTitle
     public int getCommentId() {
         return commentId;
     }
@@ -27,7 +27,7 @@ public class Comment {
         return userName;
     }
 
-    public int getNoteId() {
-        return noteId;
+    public String getNoteTitle() {
+        return noteTitle;
     }
 }

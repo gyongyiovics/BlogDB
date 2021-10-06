@@ -10,9 +10,9 @@ public class Blog {
     @Getter
     private int id;
     @Getter
-    private List<String> noteText; //make a List?
+    private List<String> noteText;
     @Getter
-    private List<String> commentText; //make a List?
+    private List<String> commentText;
     @Getter
     private boolean isOwn;
     @Getter

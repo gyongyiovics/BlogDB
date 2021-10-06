@@ -4,7 +4,14 @@ public enum RoleName {
     /**
      * a szerepkör lehet: admin / moderator / user
      */
-    ADMIN,
-    MODERATOR,
-    USER
+    ADMIN("admin"),
+    MODERATOR("moderator"),
+    USER("user");
+
+    //TODO: getter for the rolename
+    public final String ROLE_NAME;
+    RoleName(String roleName) {
+        ROLE_NAME = roleName;
+    }
+
 }

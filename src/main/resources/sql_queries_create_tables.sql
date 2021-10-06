@@ -23,11 +23,10 @@ CREATE TABLE blog_table(
 
 DROP TABLE IF EXISTS user_table;
 CREATE TABLE user_table(
-	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
-	user_name varchar(50), /*username*/
-    is_registered boolean
-	/*role_name ENUM('ADMIN', 'MODERATOR','USER') DEFAULT 'USER'*/ /*PK from role_table*/
-	user_password varchar(50)
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
+    user_name varchar(50),
+/*role_name PK from role_table*/
+    user_password varchar(50)
 );
 
 DROP TABLE IF EXISTS role_table;
