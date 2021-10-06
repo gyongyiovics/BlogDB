@@ -1,55 +1,23 @@
 package application.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
 public class Role {
+    @Getter
     private RoleName roleName;
+    @Getter
     private boolean canReadData;
+    @Getter
     private boolean canModifyData;
+    @Getter
     private boolean canReadNote;
+    @Getter
     private boolean canModifyNote;
+    @Getter
     private boolean canDeleteNote;
+    @Getter
     private boolean canWriteComment;
 
-    public Role(RoleName roleName,
-                boolean canReadData,
-                boolean canModifyData,
-                boolean canReadNote,
-                boolean canModifyNote,
-                boolean canDeleteNote,
-                boolean canWriteComment) {
-        this.roleName = roleName;
-        this.canReadData = canReadData;
-        this.canModifyData = canModifyData;
-        this.canReadNote = canReadNote;
-        this.canModifyNote = canModifyNote;
-        this.canDeleteNote = canDeleteNote;
-        this.canWriteComment = canWriteComment;
-    }
-
-    public RoleName getRoleName() {
-        return roleName;
-    }
-
-    public boolean isCanReadData() {
-        return canReadData;
-    }
-
-    public boolean isCanModifyData() {
-        return canModifyData;
-    }
-
-    public boolean isCanReadNote() {
-        return canReadNote;
-    }
-
-    public boolean isCanModifyNote() {
-        return canModifyNote;
-    }
-
-    public boolean isCanDeleteNote() {
-        return canDeleteNote;
-    }
-
-    public boolean isCanWriteComment() {
-        return canWriteComment;
-    }
 }

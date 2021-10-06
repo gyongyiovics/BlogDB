@@ -1,33 +1,19 @@
 package application.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.awt.image.BufferedImage;
 
+@AllArgsConstructor
 public class BlogSchema {
+    @Getter
     private String schema_name;
+    @Getter
     private String category;
+    @Getter
     private String color;
+    @Getter
     private BufferedImage backgroundImage;
 
-    public BlogSchema(String schema_name, String category, String color, BufferedImage backgroundImage) {
-        this.schema_name = schema_name;
-        this.category = category;
-        this.color = color;
-        this.backgroundImage = backgroundImage;
-    }
-
-    public String getSchema_name() {
-        return schema_name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public BufferedImage getBackgroundImage() {
-        return backgroundImage;
-    }
 }
