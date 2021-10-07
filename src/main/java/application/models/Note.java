@@ -10,8 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Note {
-    @Getter
-    private long id;
+/*    @Getter
+    private long id;*/
     @Getter
     private String noteText;
     @Getter
@@ -23,7 +23,7 @@ public class Note {
     @Getter
     private long blogId;
 
-    public List<Comment> getComments() {
+    /*public List<Comment> getComments() {
         System.out.println("return a list of comments on note");
         List<Comment> commentList = new ArrayList<>();
 
@@ -36,5 +36,5 @@ public class Note {
         }
 
         return commentsOfNote;
-    }
+    }*/
 }

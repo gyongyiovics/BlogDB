@@ -16,16 +16,16 @@ import java.util.List;
  * visszaadja egy adott felhasználó összes blogját
  * mysql: SELECT note_text FROM note_table WHERE user_name LIKE 'Jancsi@45';
  * visszaadja egy adott blog összes blogbejegyzését
- * mysql: SELECT note_text FROM note_table WHERE blog_id = 2;
+ * mysql: SELECT note_text FROM note_table WHERE blog_id LIKE 2;
  * visszaadja egy adott blogbejegyzéshez tartozó összes kommentet
- * mysql: SELECT comment_text FROM comment_table WHERE note_id = 1;
+ * mysql: SELECT comment_text FROM comment_table WHERE note_id LIKE 1;
  **/
 
 public class Query {
     DBEngine dbEngine = new DBEngine();
 
     public List<User> userList(String row, String searchName) {
-        String query = "SELECT * FROM user_table WHERE " + row + " IS " + searchName;
+        String query = "SELECT * FROM user_table WHERE " + row + " LIKE " + searchName;
         List<User> users = new ArrayList<>();
         User user = null;
 
@@ -37,7 +37,7 @@ public class Query {
                 long id = resultSet.getLong("id");
                 String userName = resultSet.getString("user_name");
                 String userPw = resultSet.getString("user_password");
-                String roleDB = resultSet.getNString("user").toUpperCase();
+                String roleDB = resultSet.getString("user_role").toUpperCase();
                 RoleName roleName = RoleName.valueOf(roleDB);
 
                 user = new User(id, userName, userPw, roleName);
@@ -55,22 +55,24 @@ public class Query {
     public List<String> noteTexts(String row, String searchText) {
         String query =  "SELECT note_text FROM note_table WHERE " + row + " LIKE " + searchText;
         List<String> texts = new ArrayList<>();
-        Note note = null;
+        //List<Long> ids = new ArrayList<>();
+        //Note note = null;
 
         try {
             Statement statement = dbEngine.connect().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                long id = resultSet.getLong("id");
+                //long id = resultSet.getLong("id");
                 String noteText = resultSet.getString("note_text");
-                String userName = resultSet.getString("user_name");
+                /*String userName = resultSet.getString("user_name");
                 boolean hasComment = resultSet.getBoolean("has_comment");
-                String state = resultSet.getString("state");
-                long blogId = resultSet.getLong("blog_id");
+                String state = resultSet.getString("state");*/
+                //long blogId = resultSet.getLong("blog_id");
 
-                note = new Note(id, noteText, userName, hasComment, state, blogId);
-                texts.add(note.getNoteText());
+                //note = new Note(noteText, userName, hasComment, state, blogId);
+                texts.add(noteText);
+                //ids.add(blogId);
             }
 
         } catch (SQLException e) {
@@ -80,23 +82,23 @@ public class Query {
         return texts;
     }
 
-    public List<String> commentTexts(String row, String searchText) {
-        String query =  "SELECT comment_text FROM comment_table WHERE " + row + " LIKE " + searchText;
+    public List<String> commentTexts(String row, String rowNum) {
+        String query =  "SELECT comment_text FROM comment_table WHERE " + row + " LIKE " + rowNum;
         List<String> comments = new ArrayList<>();
-        Comment comment = null;
+        //Comment comment = null;
 
         try {
             Statement statement = dbEngine.connect().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                long commentId = resultSet.getLong("comment_id");
+                //long commentId = resultSet.getLong("comment_id");
                 String commentText = resultSet.getString("comment_text");
-                String userName = resultSet.getString("user_name");
-                long noteId = resultSet.getLong("note_id");
+                //String userName = resultSet.getString("user_name");
+                //long noteId = resultSet.getLong("note_id");
 
-                comment = new Comment(commentId, commentText, userName, noteId);
-                comments.add(comment.getCommentText());
+                //comment = new Comment(commentId, commentText, userName, noteId);
+                comments.add(commentText);
             }
 
         } catch (SQLException e) {
