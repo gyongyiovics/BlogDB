@@ -4,17 +4,17 @@ INSERT INTO blog_schema VALUES
 ('cats','cat_schema','yellow', LOAD_FILE('data.png')),
 ('dogs','dog_schema','purple', LOAD_FILE('data.png')); 
 
-INSERT INTO blog_table(note_text, comment_text, is_own) VALUES
+INSERT INTO blog_table(note_text, comment_text, user_name) VALUES
 ('Hello world', 'no comment', true),
 ('Todays schedule', 'not today', false),
 ('Zombie ipsum reversus ab viral inferno', '???', true),
 ('Cum horribilem walking dead resurgere de crazed sepulcris creaturis...', '', false);
 
-INSERT INTO user_table(user_name, is_registered) VALUES
-('Jancsi@45', true),
-('Bela@bbb', false),
-('Gizi@123', true),
-('Geodézia23', true);
+INSERT INTO user_table(user_name, user_password) VALUES
+('Jancsi@45', 'pw'),
+('Bela@bbb', 'pw'),
+('Gizi@123', 'pw'),
+('Geodézia23', 'pw');
 
 INSERT INTO role_table VALUES
 ('ADMIN', true, true, true, true, true, true),

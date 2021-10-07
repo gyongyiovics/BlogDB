@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class GetDataFromSomewhere {
 
-
+/*
     public static void main(String[] args) {
 
 
@@ -68,7 +68,7 @@ public class GetDataFromSomewhere {
 
 
     //TODO: debug: lists all of the users
-    /*public static Map<String, List<User>> getUsersData (String roleName) {
+    *//*public static Map<String, List<User>> getUsersData (String roleName) {
         List <User> users = setUserList();
         Map<String, List<User>> userWithRole = new HashMap<>();
 
@@ -79,7 +79,7 @@ public class GetDataFromSomewhere {
             }
         }
         return null;
-    }*/
+    }*//*
 
     //put into a map as key: userName, value: List of Notes
     private Map<User, List<Note>> getUserNotes(String userName) {
@@ -116,5 +116,5 @@ public class GetDataFromSomewhere {
             return getCommentsByNote;
         }
         return null;
-    }
+    }*/
 }

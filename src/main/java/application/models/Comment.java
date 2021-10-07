@@ -4,19 +4,13 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class Comment {
-    private int commentId;
-    private String commentTitle;
+    private long commentId;
     private String commentText;
     private String userName;
-    private String noteTitle;
+    private long noteId;
 
-    //TODO: add logic to getNoteTitle
-    public int getCommentId() {
+    public long getCommentId() {
         return commentId;
-    }
-
-    public String getCommentTitle() {
-        return commentTitle;
     }
 
     public String getCommentText() {
@@ -27,7 +21,7 @@ public class Comment {
         return userName;
     }
 
-    public String getNoteTitle() {
-        return noteTitle;
+    public long getNoteId() {
+        return noteId;
     }
 }

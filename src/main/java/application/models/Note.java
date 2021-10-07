@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Note {
     @Getter
-    private String noteTitle;
+    private long id;
     @Getter
     private String noteText;
     @Getter
@@ -19,9 +19,9 @@ public class Note {
     @Getter
     private boolean hasComment;
     @Getter
-    private State state;
+    private String state;
     @Getter
-    private String blogSchema; //or ENUM?
+    private long blogId;
 
     public List<Comment> getComments() {
         System.out.println("return a list of comments on note");
@@ -30,7 +30,7 @@ public class Note {
         List<Comment> commentsOfNote = new ArrayList<>();
 
         for(Comment comment : commentList) {
-            if(hasComment && (comment.getNoteTitle().equals(noteTitle))) {
+            if(hasComment && (comment.getNoteId() == id)) {
                 commentsOfNote.add(comment);
             }
         }

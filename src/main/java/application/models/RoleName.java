@@ -8,7 +8,6 @@ public enum RoleName {
     MODERATOR("moderator"),
     USER("user");
 
-    //TODO: getter for the rolename
     public final String ROLE_NAME;
     RoleName(String roleName) {
         ROLE_NAME = roleName;

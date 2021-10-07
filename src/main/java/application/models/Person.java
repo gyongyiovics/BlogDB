@@ -22,5 +22,5 @@ public class Person {
     @Getter
     private List<Comment> otherComments;
 
-    //TODO: what he/she can see
+    //TODO: what he/she can see; add logic to getters :D
 }

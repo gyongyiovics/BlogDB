@@ -13,10 +13,9 @@ CREATE TABLE blog_schema(
 
 DROP TABLE IF EXISTS blog_table;
 CREATE TABLE blog_table(
-	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
-	note_text varchar(100),
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
+    note_text varchar(100),
     comment_text varchar(50),
-    is_own boolean,
     blog_schema varchar(30),
     FOREIGN KEY(blog_schema) REFERENCES blog_schema(schema_name)
 );
@@ -25,13 +24,14 @@ DROP TABLE IF EXISTS user_table;
 CREATE TABLE user_table(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
     user_name varchar(50),
-/*role_name PK from role_table*/
-    user_password varchar(50)
+    user_password varchar(50),
+    user_role ENUM('ADMIN', 'MODERATOR','USER') DEFAULT 'USER',
+    FOREIGN KEY(user_role) REFERENCES role_table(role_name) 
 );
 
 DROP TABLE IF EXISTS role_table;
 CREATE TABLE role_table(
-	role_name ENUM('ADMIN', 'MODERATOR','USER') DEFAULT 'USER' PRIMARY KEY, /*PK for the user_table*/
+    role_name ENUM('ADMIN', 'MODERATOR','USER') DEFAULT 'USER' PRIMARY KEY,
     can_read_data boolean,
     can_modify_data boolean,
     can_read_note boolean,
@@ -43,30 +43,23 @@ CREATE TABLE role_table(
 DROP TABLE IF EXISTS note_table;
 CREATE TABLE note_table(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
-    note_title varchar(30),
     note_text varchar(100),
     user_name varchar(50),
     has_comment boolean,
     state ENUM('draft', 'released', 'deleted') DEFAULT 'draft',
-    /*comment_title varchar(50) if the has_comment is false, this is empty*/
-    blog_schema varchar(50),
-    FOREIGN KEY(blog_schema) REFERENCES blog_schema(schema_name)
+    blog_id INT,
+    FOREIGN KEY(blog_id) REFERENCES blog_table(id)
 );
 
 DROP TABLE IF EXISTS comment_table;
 CREATE TABLE comment_table(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
-    comment_title varchar(30),
     comment_text varchar(50),
     user_name varchar(50),
     note_id INT UNSIGNED NOT NULL,
-    /*has_note boolean,*/
-    /*this might be always true! has_comment instead?*/
-    /*note_title varchar(50) if the has_note is false, this is empty*/
     FOREIGN KEY(note_id) REFERENCES note_table(id)
 );
 
-/*TODO: add a list of notes, comments as a comma-separated string*/
 
 DROP TABLE IF EXISTS person_table;
 CREATE TABLE person_table(

@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class User extends Person {
     @Getter
-    private int id;
+    private long id;
     @Getter
     private String userName;
     @Getter
