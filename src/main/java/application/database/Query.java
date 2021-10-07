@@ -22,6 +22,7 @@ import java.util.List;
  **/
 
 public class Query {
+    List<String> texts = new ArrayList<>();
     DBEngine dbEngine = new DBEngine();
 
     public List<User> userList(String row, String searchName) {
@@ -52,9 +53,10 @@ public class Query {
         return users;
     }
 
+    //TODO: type of Long or String
     public List<String> noteTexts(String row, String searchText) {
         String query =  "SELECT note_text FROM note_table WHERE " + row + " LIKE " + searchText;
-        List<String> texts = new ArrayList<>();
+        //List<String> texts = new ArrayList<>();
         //List<Long> ids = new ArrayList<>();
         //Note note = null;
 
@@ -63,14 +65,8 @@ public class Query {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                //long id = resultSet.getLong("id");
                 String noteText = resultSet.getString("note_text");
-                /*String userName = resultSet.getString("user_name");
-                boolean hasComment = resultSet.getBoolean("has_comment");
-                String state = resultSet.getString("state");*/
                 //long blogId = resultSet.getLong("blog_id");
-
-                //note = new Note(noteText, userName, hasComment, state, blogId);
                 texts.add(noteText);
                 //ids.add(blogId);
             }
@@ -82,22 +78,37 @@ public class Query {
         return texts;
     }
 
-    public List<String> commentTexts(String row, String rowNum) {
-        String query =  "SELECT comment_text FROM comment_table WHERE " + row + " LIKE " + rowNum;
-        List<String> comments = new ArrayList<>();
-        //Comment comment = null;
+
+    public List<String> noteTextsFromId(String row, long idNum) {
+        String query =  "SELECT note_text FROM note_table WHERE " + row + " = " + idNum;
+        List<String> result = new ArrayList<>();
 
         try {
             Statement statement = dbEngine.connect().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                //long commentId = resultSet.getLong("comment_id");
-                String commentText = resultSet.getString("comment_text");
-                //String userName = resultSet.getString("user_name");
-                //long noteId = resultSet.getLong("note_id");
+                String noteText = resultSet.getString("note_text");
+                result.add(noteText);
+            }
 
-                //comment = new Comment(commentId, commentText, userName, noteId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Not found");
+        }
+        return result;
+    }
+
+    public List<String> commentTexts(String row, String rowNum) {
+        String query =  "SELECT comment_text FROM comment_table WHERE " + row + " LIKE " + rowNum;
+        List<String> comments = new ArrayList<>();
+
+        try {
+            Statement statement = dbEngine.connect().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                String commentText = resultSet.getString("comment_text");
                 comments.add(commentText);
             }
 
