@@ -3,6 +3,7 @@ package application.models;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,16 @@ import java.util.List;
 @AllArgsConstructor
 public class User extends Person {
     @Getter
+    @Setter
     private long id;
     @Getter
+    @Setter
     private String userName;
     @Getter
+    @Setter
     private String passWord;
     @Getter
+    @Setter
     private RoleName usersRole;
 
 

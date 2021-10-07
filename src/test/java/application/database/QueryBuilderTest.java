@@ -46,6 +46,6 @@ class QueryBuilderTest {
     void buildTest() {
         String text = ";";
         Assertions.assertEquals(text, new QueryBuilder().build());
-        
+
     }
 }
