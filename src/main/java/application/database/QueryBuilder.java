@@ -10,7 +10,7 @@ import java.util.List;
  * visszaadja egy adott felhasználó összes adatát:
  * SELECT * FROM user WHERE user_name IS ...;
  * visszaadja egy adott felhasználó összes blogját
- * SELECT blog_text FROM ... WHERE user_name IS ...;
+ * SSELECT blog_title FROM blog_to_user WHERE user_id = 1;
  * visszaadja egy adott blog összes blogbejegyzését
  * SELECT blog_text FROM ... WHERE blog is ...;
  * visszaadja egy adott blogbejegyzéshez tartozó összes kommentet

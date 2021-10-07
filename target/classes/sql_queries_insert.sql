@@ -42,12 +42,7 @@ INSERT INTO person_table(name, is_registered, blog_id) VALUES
 ('Gizi@123', false, 1),
 ('Geodézia23', true, 3);
 
-
-/*connections*/
-/*
-INSERT INTO connect_user_and_note VALUES();
-
-INSERT INTO connect_user_and_comment VALUES();
-
-INSERT INTO connect_user_and_roles VALUES();
-*/
+INSERT INTO blog_to_user VALUES
+('HelloBello', 1, 1),
+('BElaVagyok', 2, 2),
+('Schedule', 2, 1);

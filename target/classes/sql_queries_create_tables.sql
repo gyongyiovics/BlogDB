@@ -13,10 +13,11 @@ CREATE TABLE blog_schema(
 DROP TABLE IF EXISTS blog_table;
 CREATE TABLE blog_table(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL UNIQUE,
+    
     note_text varchar(100),
     comment_text varchar(50),
     blog_schema varchar(30),
-    FOREIGN KEY(blog_schema) REFERENCES blog_schema(schema_name)
+    FOREIGN KEY(blog_schema) REFERENCES blog_schema(schema_name)    
 );
 
 DROP TABLE IF EXISTS role_table;
@@ -65,4 +66,13 @@ CREATE TABLE person_table(
     is_registered boolean,
     blog_id INT UNSIGNED NOT NULL,
     FOREIGN KEY(blog_id) REFERENCES blog_table(id)
+);
+
+DROP TABLE IF EXISTS blog_to_user;
+CREATE TABLE blog_to_user(
+    blog_title varchar(30),
+    blog_id INT UNSIGNED NOT NULL,
+    user_id INT UNSIGNED NOT NULL,
+    FOREIGN KEY(blog_id) REFERENCES blog_table(id),
+    FOREIGN KEY(user_id) REFERENCES user_table(id)
 );

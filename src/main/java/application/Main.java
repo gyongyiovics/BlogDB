@@ -11,10 +11,11 @@ public class Main {
 
         Query query = new Query();
 
-        System.out.println(query.userList("user_role", "'USER'").get(0).getUserName());
-        System.out.println(query.userList("user_name", "'Gizi@123'").get(0).getUsersRole());
-        System.out.println(query.noteTexts("user_name", "'Jancsi@45'"));
-        System.out.println(query.noteTextsFromId("blog_id", 1));
+        System.out.println(query.userListByRole("'USER'").get(0).getUserName());
+        System.out.println(query.userListByName("'Gizi@123'").get(0).getUsersRole());
+        System.out.println(query.noteTextsById("blog_id", 1));
         System.out.println(query.commentTexts("note_id", "1"));
+
+        System.out.println(query.blogsById("user_id", 1));
     }
 }

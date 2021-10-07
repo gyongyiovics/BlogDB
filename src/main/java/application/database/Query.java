@@ -14,19 +14,23 @@ import java.util.List;
  * visszaadja egy adott felhasználó összes adatát:
  * mysql: SELECT * FROM user_table WHERE user_name LIKE 'Gizi@123';
  * visszaadja egy adott felhasználó összes blogját
- * mysql: SELECT note_text FROM note_table WHERE user_name LIKE 'Jancsi@45';
+ * mysql: SELECT blog_title FROM blog_to_user WHERE user_id = 1;
  * visszaadja egy adott blog összes blogbejegyzését
- * mysql: SELECT note_text FROM note_table WHERE blog_id LIKE 2;
+ * mysql: SELECT note_text FROM note_table WHERE blog_id = 2;
  * visszaadja egy adott blogbejegyzéshez tartozó összes kommentet
- * mysql: SELECT comment_text FROM comment_table WHERE note_id LIKE 1;
+ * mysql: SELECT comment_text FROM comment_table WHERE note_id = 1;
  **/
 
 public class Query {
     List<String> texts = new ArrayList<>();
     DBEngine dbEngine = new DBEngine();
+    QueryBuilder queryBuilder = new QueryBuilder();
 
-    public List<User> userList(String row, String searchName) {
-        String query = "SELECT * FROM user_table WHERE " + row + " LIKE " + searchName;
+
+    public List<User> userListByName(String searchName) {
+        //TODO: query statement thingy, builder
+
+        String query = "SELECT * FROM user_table WHERE user_name LIKE " + searchName;
         List<User> users = new ArrayList<>();
         User user = null;
 
@@ -53,22 +57,44 @@ public class Query {
         return users;
     }
 
-    //TODO: type of Long or String
-    public List<String> noteTexts(String row, String searchText) {
-        String query =  "SELECT note_text FROM note_table WHERE " + row + " LIKE " + searchText;
-        //List<String> texts = new ArrayList<>();
-        //List<Long> ids = new ArrayList<>();
-        //Note note = null;
+    public List<User> userListByRole(String role){
+        String query = "SELECT * FROM user_table WHERE user_role LIKE " + role;
+        List<User> userList = new ArrayList<>();
+        User user = null;
 
         try {
             Statement statement = dbEngine.connect().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                String noteText = resultSet.getString("note_text");
-                //long blogId = resultSet.getLong("blog_id");
+                long id = resultSet.getLong("id");
+                String userName = resultSet.getString("user_name");
+                String userPw = resultSet.getString("user_password");
+                String roleDB = resultSet.getString("user_role").toUpperCase();
+                RoleName roleName = RoleName.valueOf(roleDB);
+
+                user = new User(id, userName, userPw, roleName);
+                userList.add(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Not found");
+        }
+
+        return userList;
+    }
+
+    public List<String> blogsById(String row, long searchId) {
+        String query = "SELECT blog_title FROM blog_to_user WHERE " + row + " = " + searchId;
+
+        try {
+            Statement statement = dbEngine.connect().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                String noteText = resultSet.getString("blog_title");
                 texts.add(noteText);
-                //ids.add(blogId);
             }
 
         } catch (SQLException e) {
@@ -78,9 +104,9 @@ public class Query {
         return texts;
     }
 
-
-    public List<String> noteTextsFromId(String row, long idNum) {
+    public List<String> noteTextsById(String row, long idNum) {
         String query =  "SELECT note_text FROM note_table WHERE " + row + " = " + idNum;
+        //String builtQuery = queryBuilder.select().where().build();
         List<String> result = new ArrayList<>();
 
         try {
