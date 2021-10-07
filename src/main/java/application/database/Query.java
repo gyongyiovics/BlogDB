@@ -10,20 +10,15 @@ import java.util.List;
 
 /**
  * visszaadja adott szerepkörű felhasználók összes adatát
- * mysql: SELECT * FROM user WHERE role IS 'admin';
- * java: getUsersData
+ * mysql: SELECT * FROM user_table WHERE user_role LIKE 'ADMIN';
  * visszaadja egy adott felhasználó összes adatát:
- * mysql: SELECT * FROM user WHERE user_name IS 'gizi33';
- * java: new User
+ * mysql: SELECT * FROM user_table WHERE user_name LIKE 'Gizi@123';
  * visszaadja egy adott felhasználó összes blogját
- * mysql: SELECT note_text FROM note_table WHERE user_name IS 'gero36';
- * java: getUserNotes
+ * mysql: SELECT note_text FROM note_table WHERE user_name LIKE 'Jancsi@45';
  * visszaadja egy adott blog összes blogbejegyzését
- * mysql: SELECT note_text FROM note_table WHERE blog_id is 2;
- * java: new Blog -> getText
+ * mysql: SELECT note_text FROM note_table WHERE blog_id = 2;
  * visszaadja egy adott blogbejegyzéshez tartozó összes kommentet
- * mysql: SELECT comment_text FROM comment_table WHERE blog_text IS 'Hello world!';
- * java: getNoteComments
+ * mysql: SELECT comment_text FROM comment_table WHERE note_id = 1;
  **/
 
 public class Query {
@@ -108,7 +103,6 @@ public class Query {
             e.printStackTrace();
             System.out.println("Not found");
         }
-
         return comments;
     }
 

@@ -5,6 +5,7 @@ import java.util.Properties;
 
 public class DBEngine {
     private Connection connection;
+
     public DBEngine() {
         connection = connect();
     }
