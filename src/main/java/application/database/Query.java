@@ -23,15 +23,15 @@ import java.util.List;
 
 public class Query {
     List<String> texts = new ArrayList<>();
-    DBEngine dbEngine = new DBEngine();
-    QueryBuilder queryBuilder = new QueryBuilder();
+    List<User> users = new ArrayList<>();
 
+
+    DBEngine dbEngine = new DBEngine();
 
     public List<User> userListByName(String searchName) {
-        //TODO: query statement thingy, builder
-
         String query = "SELECT * FROM user_table WHERE user_name LIKE " + searchName;
-        List<User> users = new ArrayList<>();
+        /*String builtQuery = new QueryBuilder().select(Table.USER_TABLE).where(Column.USER_NAME, true).build();
+        System.out.println(builtQuery);*/
         User user = null;
 
         try {
@@ -59,7 +59,7 @@ public class Query {
 
     public List<User> userListByRole(String role){
         String query = "SELECT * FROM user_table WHERE user_role LIKE " + role;
-        List<User> userList = new ArrayList<>();
+        //List<User> userList = new ArrayList<>();
         User user = null;
 
         try {
@@ -74,7 +74,7 @@ public class Query {
                 RoleName roleName = RoleName.valueOf(roleDB);
 
                 user = new User(id, userName, userPw, roleName);
-                userList.add(user);
+                users.add(user);
             }
 
         } catch (SQLException e) {
@@ -82,7 +82,7 @@ public class Query {
             System.out.println("Not found");
         }
 
-        return userList;
+        return users;
     }
 
     public List<String> blogsById(String row, long searchId) {

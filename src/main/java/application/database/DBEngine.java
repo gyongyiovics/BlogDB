@@ -24,8 +24,6 @@ public class DBEngine {
         properties.put("user", System.getenv("DB_USER"));
         properties.put("password", System.getenv("DB_PASSWORD"));
 
-        /*properties.put("user", "root");
-        properties.put("password", "1981&Gyongyi");*/
         try {
             return DriverManager.getConnection(url, properties);
         } catch (SQLException e) {

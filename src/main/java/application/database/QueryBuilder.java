@@ -25,7 +25,6 @@ public class QueryBuilder {
     }
 
     //SELECT
-    //TODO: add String word as a parameter or an AS?
     public QueryBuilder select(Table table, Column... columns) {
         query.append("SELECT ");
         if (columns.length > 0) {
@@ -48,7 +47,7 @@ public class QueryBuilder {
     }
 
     //AGGREGATED
-    public QueryBuilder selectAggregate(Table table, String aggregatedName, String asText, Column... columns) {
+    /*public QueryBuilder selectAggregate(Table table, String aggregatedName, String asText, Column... columns) {
         query.append("SELECT ")
                 .append(aggregatedName)
                 .append("(*)")
@@ -56,7 +55,7 @@ public class QueryBuilder {
                 .append(asText)
                 .append(" FROM ").append(EnumHelper.getDBName(table));
         return this;
-    }
+    }*/
 
     private void addColumns(Column... columns) {
         for (Column column: columns) {
