@@ -6,19 +6,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class QueryTest {
-
     Query queryDB = new Query();
- /*   @Test
-    void userListByName() {
-        Query query = new Query();
-        List<User> expected = new ArrayList<>();
 
-        User user = new User();
+    @Test
+    void userListByName() {
+        List<User> expected;
+
+        /*User user = new User();
         user.setId(3);
         user.setUserName("Gizi@123");
         user.setPassWord("pw");
@@ -26,22 +26,24 @@ class QueryTest {
 
         System.out.println(user.getUserName());
 
-        expected.add(user);
-        String name1 = expected.get(0).getUserName();
-        System.out.println(name1);
+        expected.add(user);*/
 
-        *//*List<User> actual = query.userListByName("'Gizi@123'");
+        expected = Arrays.asList(new User(3, "Gizi@123", "pw", RoleName.UNREGISTERED));
+
         String name1 = expected.get(0).getUserName();
+        //System.out.println(name1);
+
+        List<User> actual = queryDB.userListByName("'Gizi@123'");
         String name2 = actual.get(0).getUserName();
 
-        Assertions.assertEquals(name1, name2);*//*
+        Assertions.assertEquals(expected.size(), actual.size());
 
-        //System.out.println(compare(expected, actual));
+        //System.out.println(compareUser(expected, actual));
 
-        *//*
+        /*
         * Gizi@123, pw, UNREGISTERED
-         *//*
-    }*/
+         */
+    }
 
     //similar User test can be used here
     @Test
@@ -50,6 +52,7 @@ class QueryTest {
 
     @Test
     void blogsById() {
+        //TODO: asList
         List<String> textList = new ArrayList<>();
         textList.add("HelloBello");
         textList.add("Schedule");

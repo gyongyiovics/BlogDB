@@ -2,9 +2,7 @@ package application.database;
 
 import application.models.*;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +25,12 @@ public class Query {
 
 
     DBEngine dbEngine = new DBEngine();
+    Connection connect = dbEngine.connect();
 
     public List<User> userListByName(String searchName) {
         String query = "SELECT * FROM user_table WHERE user_name LIKE " + searchName;
-        /*String builtQuery = new QueryBuilder().select(Table.USER_TABLE).where(Column.USER_NAME, true).build();
-        System.out.println(builtQuery);*/
+        String builtQuery = new QueryBuilder().select(Table.USER_TABLE).where(Column.USER_NAME, true).build();
+        System.out.println(builtQuery);
         User user = null;
 
         try {
@@ -39,10 +38,10 @@ public class Query {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                long id = resultSet.getLong("id");
-                String userName = resultSet.getString("user_name");
-                String userPw = resultSet.getString("user_password");
-                String roleDB = resultSet.getString("user_role").toUpperCase();
+                long id = resultSet.getLong(1);
+                String userName = resultSet.getString(2);
+                String userPw = resultSet.getString(3);
+                String roleDB = resultSet.getString(4).toUpperCase();
                 RoleName roleName = RoleName.valueOf(roleDB);
 
                 user = new User(id, userName, userPw, roleName);
@@ -59,7 +58,6 @@ public class Query {
 
     public List<User> userListByRole(String role){
         String query = "SELECT * FROM user_table WHERE user_role LIKE " + role;
-        //List<User> userList = new ArrayList<>();
         User user = null;
 
         try {
@@ -67,10 +65,10 @@ public class Query {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                long id = resultSet.getLong("id");
-                String userName = resultSet.getString("user_name");
-                String userPw = resultSet.getString("user_password");
-                String roleDB = resultSet.getString("user_role").toUpperCase();
+                long id = resultSet.getLong(1);
+                String userName = resultSet.getString(2);
+                String userPw = resultSet.getString(3);
+                String roleDB = resultSet.getString(4).toUpperCase();
                 RoleName roleName = RoleName.valueOf(roleDB);
 
                 user = new User(id, userName, userPw, roleName);
@@ -125,13 +123,20 @@ public class Query {
         return result;
     }
 
-    public List<String> commentTexts(String row, String rowNum) {
-        String query =  "SELECT comment_text FROM comment_table WHERE " + row + " LIKE " + rowNum;
+    public List<String> commentTexts(String rowNum) {
+        String query =  "SELECT comment_text FROM comment_table WHERE note_id LIKE ?";
+        String builtQuery = new QueryBuilder().select(Table.COMMENT_TABLE, Column.COMMENT_TEXT).where(Column.NOTE_ID, true).build();
         List<String> comments = new ArrayList<>();
 
         try {
+            /*
             Statement statement = dbEngine.connect().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
+            */
+
+            PreparedStatement preparedStatement = connect.prepareStatement(builtQuery);
+            preparedStatement.setString(1, rowNum);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 String commentText = resultSet.getString("comment_text");

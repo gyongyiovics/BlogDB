@@ -46,28 +46,18 @@ public class QueryBuilder {
         return this;
     }
 
-    //AGGREGATED
-    /*public QueryBuilder selectAggregate(Table table, String aggregatedName, String asText, Column... columns) {
-        query.append("SELECT ")
-                .append(aggregatedName)
-                .append("(*)")
-                .append(" AS ")
-                .append(asText)
-                .append(" FROM ").append(EnumHelper.getDBName(table));
-        return this;
-    }*/
-
-    private void addColumns(Column... columns) {
+    public void addColumns(Column... columns) {
         for (Column column: columns) {
             query.append(EnumHelper.getDBName(column)).append(", ");
         }
         query.setLength(query.length() - 2);
     }
 
-    private void prepareValues(int repeat) {
+    public void prepareValues(int repeat) {
         query.append("VALUES (")
                 .append("?,".repeat(repeat));
         query.setLength(query.length() - 1);
+
         query.append(")");
     }
 
