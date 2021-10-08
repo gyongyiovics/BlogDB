@@ -53,14 +53,6 @@ public class QueryBuilder {
         query.setLength(query.length() - 2);
     }
 
-    public void prepareValues(int repeat) {
-        query.append("VALUES (")
-                .append("?,".repeat(repeat));
-        query.setLength(query.length() - 1);
-
-        query.append(")");
-    }
-
     public String build() {
         query.append(";");
         return query.toString();

@@ -28,7 +28,6 @@ public class Query {
     public List<User> userListByName(String searchName) {
         //String query = "SELECT * FROM user_table WHERE user_name LIKE " + searchName;
         String builtQuery = new QueryBuilder().select(Table.USER_TABLE).where(Column.USER_NAME, true).build();
-        System.out.println(builtQuery);
 
         List<User> users = new ArrayList<>();
 
